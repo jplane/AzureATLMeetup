@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="NTM.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="NTM.Auditing">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="reposConnectionString" value="REPOS CONNECTION STRING" />
+      <Setting name="topicConnectionString" value="TOPIC CONNECTION STRING" />
+      <Setting name="topicName" value="TOPIC NAME" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="NTM.Analytics">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="topicConnectionString" value="TOPIC CONNECTION STRING" />
+      <Setting name="topicName" value="TOPIC NAME" />
+      <Setting name="ddbEndpointUri" value="DDB ENDPOINT URI" />
+      <Setting name="ddbAuthKey" value="DDB AUTH KEY" />
+      <Setting name="ddbName" value="eventanalytics" />
+      <Setting name="ddbCollection" value="purchaseresults" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="NTM.InventoryManagement">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="topicConnectionString" value="TOPIC CONNECTION STRING" />
+      <Setting name="topicName" value="TOPIC NAME" />
+      <Setting name="reposConnectionString" value="REPOS CONNECTION STRING" />
+      <Setting name="ehHostName" value="EH HOST NAME" />
+      <Setting name="ehConnectionString" value="EH CONNECTION STRING" />
+      <Setting name="ehName" value="EH NAME" />
+      <Setting name="storageConnectionString" value="STORAGE CONNECTION STRING" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

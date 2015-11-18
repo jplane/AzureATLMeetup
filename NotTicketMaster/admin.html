@@ -1,0 +1,40 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Admin App</title>
+</head>
+<body>
+    <br />
+    <table id="orders">
+        <tr>
+            <th>Id</th>
+            <th>Time Requested</th>
+            <th>Time Processed</th>
+            <th>Success?</th>
+            <th>Tickets Ordered</th>
+        </tr>
+    </table>
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.2.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function() {
+
+            var api = $.connection.mainHub;
+
+            api.client.requestProcessed = function (result) {
+                $('#orders > tbody')
+                    .append('<tr><td>' + result.id + '</td><td>' + result.requested +
+                            '</td><td>' + result.processed + '</td><td>' + result.success +
+                            '</td><td>' + result.ticketcount + '</td></tr>');
+            };
+
+            $.connection.hub.start();
+        });
+    </script>
+</body>
+
+</html>

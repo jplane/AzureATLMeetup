@@ -1,0 +1,60 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ticket Order App</title>
+</head>
+<body>
+    <div id="shows"></div>
+    <br />
+    Number of Tickets:  <input type="text" id="numTickets" /><br /><br />
+    <input type="button" id="placeOrder" value="Place Ticket Order" /><br />
+    <br />
+    <br />
+    <table id="orders">
+        <tr>
+            <th>Id</th>
+            <th>Tickets Requested</th>
+            <th>Status</th>
+        </tr>
+    </table>
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.2.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var api = $.connection.mainHub;
+
+            api.client.orderPlaced = function (data) {
+                $('#orders > tbody:last').append('<tr><td>' + data.id + '</td><td>' + data.ticketcount + '</td><td id=status_' + data.id + '>Order Placed</td></tr>');
+            };
+
+            api.client.orderSucceeded = function (data) {
+                $('#status_' + data.id).text('Success!');
+            };
+
+            api.client.orderFailed = function (data) {
+                $('#status_' + data.id).text('Epic fail!');
+            };
+
+            $.connection.hub.start().done(function () {
+
+                api.server.getShowInfo().done(function (shows) {
+                    $.each(shows, function () {
+                        var show = this;
+                        $('#shows').append('<input type="radio" name="show" value="' + show.id + '">' + show.data + '</input><br/><br/>');
+                    });
+                });
+
+                $('#placeOrder').click(function () {
+                    api.server.makeTicketRequest($('input[name=show]:checked').val(), $('#numTickets').val());
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

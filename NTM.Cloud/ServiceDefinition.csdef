@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="NTM.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
+  <WorkerRole name="NTM.Auditing" vmsize="Small">
+    <ConfigurationSettings>
+      <Setting name="topicConnectionString" />
+      <Setting name="topicName" />
+      <Setting name="reposConnectionString" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
+  <WorkerRole name="NTM.Analytics" vmsize="Small">
+    <ConfigurationSettings>
+      <Setting name="topicConnectionString" />
+      <Setting name="topicName" />
+      <Setting name="ddbEndpointUri" />
+      <Setting name="ddbAuthKey" />
+      <Setting name="ddbName" />
+      <Setting name="ddbCollection" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
+  <WorkerRole name="NTM.InventoryManagement" vmsize="Small">
+    <ConfigurationSettings>
+      <Setting name="topicConnectionString" />
+      <Setting name="topicName" />
+      <Setting name="reposConnectionString" />
+      <Setting name="ehHostName" />
+      <Setting name="ehConnectionString" />
+      <Setting name="ehName" />
+      <Setting name="storageConnectionString" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
+</ServiceDefinition>
